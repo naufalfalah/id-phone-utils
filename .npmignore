@@ -1,4 +1,4 @@
-node_modules
-src
-tests
+node_modules/
+src/
+tests/
 .eslintrc.js

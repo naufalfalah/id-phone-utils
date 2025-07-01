@@ -1,35 +1,35 @@
 {
   "name": "id-phone-utils",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Utility functions for validating Indonesian phone numbers",
-  "main": "dist/index.js",
-  "scripts": {
-    "build": "tsup",
-    "test": "vitest"
-  },
+  "author": "Naufal Falah <naufalfallah@gmail.com>",
   "keywords": [
     "phone",
     "validator",
     "indonesia",
     "utils"
   ],
-  "author": "Naufal Falah",
   "license": "MIT",
+  "main": "dist/index.js",
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "test": "vitest",
+    "lint": "eslint src --ext .ts",
+    "lint:fix": "eslint src --ext .ts --fix"
+  },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^8.35.0",
     "@typescript-eslint/parser": "^8.35.0",
     "eslint": "^9.30.0",
     "eslint-config-prettier": "^10.1.5",
+    "eslint-plugin-prettier": "^5.5.1",
     "prettier": "^3.6.2",
     "tsup": "^8.5.0",
     "typescript": "^5.8.3",
     "vitest": "^3.2.4"
-  },
-  "files": [
-    "dist",
-    "README.md"
-  ],
-  "dependencies": {
-    "eslint-plugin-prettier": "^5.5.1"
   }
 }
