@@ -1,35 +1,50 @@
 {
-  "name": "id-phone-utils",
-  "version": "1.0.1",
-  "description": "Utility functions for validating Indonesian phone numbers",
-  "author": "Naufal Falah <naufalfallah@gmail.com>",
-  "keywords": [
-    "phone",
-    "validator",
-    "indonesia",
-    "utils"
-  ],
-  "license": "MIT",
-  "main": "dist/index.js",
-  "files": [
-    "dist",
-    "README.md"
-  ],
-  "scripts": {
-    "build": "tsup",
-    "test": "vitest",
-    "lint": "eslint src --ext .ts",
-    "lint:fix": "eslint src --ext .ts --fix"
-  },
-  "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^8.35.0",
-    "@typescript-eslint/parser": "^8.35.0",
-    "eslint": "^9.30.0",
-    "eslint-config-prettier": "^10.1.5",
-    "eslint-plugin-prettier": "^5.5.1",
-    "prettier": "^3.6.2",
-    "tsup": "^8.5.0",
-    "typescript": "^5.8.3",
-    "vitest": "^3.2.4"
-  }
+    "name": "id-phone-utils",
+    "version": "1.0.1",
+    "description": "Utility functions for validating Indonesian phone numbers",
+    "author": "Naufal Falah <naufalfallah@gmail.com>",
+    "keywords": [
+        "phone",
+        "validator",
+        "indonesia",
+        "utils",
+        "normalize",
+        "operator"
+    ],
+    "license": "MIT",
+    "main": "dist/index.js",
+    "module": "dist/index.mjs",
+    "types": "dist/index.d.ts",
+    "exports": {
+        ".": {
+            "types": "./dist/index.d.ts",
+            "import": "./dist/index.mjs",
+            "require": "./dist/index.js"
+        }
+    },
+    "files": [
+        "dist",
+        "README.md"
+    ],
+    "engines": {
+        "node": ">=14.0.0"
+    },
+    "scripts": {
+        "format": "prettier --write .",
+        "lint": "eslint src",
+        "lint:fix": "eslint src --fix",
+        "test": "vitest",
+        "build": "tsup"
+    },
+    "devDependencies": {
+        "@typescript-eslint/eslint-plugin": "^8.35.0",
+        "@typescript-eslint/parser": "^8.35.0",
+        "eslint": "^9.30.0",
+        "eslint-config-prettier": "^10.1.5",
+        "eslint-plugin-prettier": "^5.5.1",
+        "prettier": "^3.6.2",
+        "tsup": "^8.5.0",
+        "typescript": "^5.8.3",
+        "vitest": "^3.2.4"
+    }
 }
