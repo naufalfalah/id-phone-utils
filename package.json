@@ -1,6 +1,6 @@
 {
     "name": "id-phone-utils",
-    "version": "1.0.1",
+    "version": "1.0.0",
     "description": "Utility functions for validating Indonesian phone numbers",
     "author": "Naufal Falah <naufalfallah@gmail.com>",
     "keywords": [
