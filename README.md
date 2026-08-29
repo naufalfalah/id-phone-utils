@@ -1,6 +1,7 @@
 # id-phone-utils
 
 [![npm version](https://img.shields.io/npm/v/id-phone-utils)](https://www.npmjs.com/package/id-phone-utils)
+[![CI](https://github.com/naufalfalah/id-phone-utils/actions/workflows/ci.yml/badge.svg)](https://github.com/naufalfalah/id-phone-utils/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 > Validate, normalize, and identify Indonesian mobile phone numbers — zero dependencies, full TypeScript support.
@@ -132,6 +133,32 @@ IndonesianPhoneValidator.clean('0812.3456.7890'); // '081234567890'
 IndonesianPhoneValidator.clean('+62 812-3456-7890'); // '+6281234567890'
 ```
 
+## Key Technical Decisions
+
+### Static class methods over plain exported functions
+
+**Decision:** All operations live as static methods on `IndonesianPhoneValidator` rather than as individual named exports.
+
+**Why:** One import gives access to everything, and the shared operator-prefix table stays private to the class instead of floating as a module-level constant.
+
+**Trade-off:** Less tree-shakeable — bundlers pull in the whole class even if a consumer only calls `isValid`. It's also a less common shape for modern ESM utility libraries, which usually favor flat function exports.
+
+### Regex + a hand-maintained prefix table, instead of a library like `libphonenumber-js`
+
+**Decision:** Carrier detection uses a hardcoded map of prefixes per operator; validation uses a single regex — no phone-number parsing library.
+
+**Why:** Keeps the package genuinely zero-dependency and tiny, appropriate for a narrow, single-country use case rather than pulling in a large general-purpose phone-number library.
+
+**Trade-off:** The prefix table needs manual updates whenever a regulator reassigns ranges to carriers, and it can't detect number portability — a number ported off its original carrier will still be reported under the old one.
+
+### Never throws — every method returns a best-effort value instead of raising an error
+
+**Decision:** Invalid or malformed input doesn't throw; it returns a sentinel like `'Unknown Operator'` or an unchanged string.
+
+**Why:** Keeps the API safe to use inline in conditionals without try/catch, which matters for a small validation utility typically called on user input at the edges of an app.
+
+**Trade-off:** Failures are silent — a typo'd number doesn't surface as an error, so callers must remember to check the sentinel value explicitly rather than relying on exceptions to catch mistakes.
+
 ## Contributing
 
 1. Fork the repository and create a feature branch.
@@ -139,6 +166,8 @@ IndonesianPhoneValidator.clean('+62 812-3456-7890'); // '+6281234567890'
 3. Add or update tests in `tests/` — all changes must be covered.
 4. Run `npm test` to verify and `npm run lint` to check style.
 5. Open a pull request with a clear description of the change.
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for dev setup, coding style, and the release process.
 
 ## License
 
